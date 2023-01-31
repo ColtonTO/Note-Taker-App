@@ -11,6 +11,6 @@ app.use(express.static(__dirname));
 
 require('./routes/routes.js')(app);
 
-app.listen(PORT, function() {
-    console.log('Server listening on PORT: ' + PORT)
-})
+app.listen(PORT, () => 
+    console.log(`App listening at http://localhost:${PORT} 🚀`)
+)

@@ -28,7 +28,10 @@ module.exports = app => {
       res.sendFile(path.join(__dirname, '../public/index.html'))
     })
     function updateDb() {
-
+      fs.writeFile('db/db.json', JSON.stringify(notes), err => {
+        if (err) throw err;
+        return true;
+      })
     }
   });
 }
