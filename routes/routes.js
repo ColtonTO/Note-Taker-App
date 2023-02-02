@@ -9,14 +9,15 @@ module.exports = app => {
 
     let notes = JSON.parse(data); 
 
-    app.get('/api/notes', function(req, res) {
-      res.json(notes)
-    })
+    app.get("/api/notes", function(req, res) {
+      res.json(notes);
+  });
 
     app.post('/api/notes', function(req, res) {
       let newNote = req.body;
       notes.push(newNote);
       updateDb()
+      res.json(newNote);
       return console.log('Added new note: ' +newNote.title)
     })
     app.get('/api/notes:id', function(req, res) {
@@ -31,7 +32,7 @@ module.exports = app => {
       res.sendFile(path.join(__dirname, '../public/index.html'))
     })
     function updateDb() {
-      fs.writeFile('db/db.json', JSON.stringify(notes), err => {
+      fs.writeFileSync('db/db.json', JSON.stringify(notes, '\t'), err => {
         if (err) throw err;
         return true;
       })
