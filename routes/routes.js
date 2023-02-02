@@ -19,6 +19,9 @@ module.exports = app => {
       updateDb()
       return console.log('Added new note: ' +newNote.title)
     })
+    app.get('/api/notes:id', function(req, res) {
+      res.json(notes[req.params.id])
+    })
 
     app.get('/notes', function(req,res) {
       res.sendFile(path.join(__dirname, '../public/notes.html'))
