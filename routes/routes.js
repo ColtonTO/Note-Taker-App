@@ -31,6 +31,15 @@ module.exports = app => {
     app.get('*', function(req,res) {
       res.sendFile(path.join(__dirname, '../public/index.html'))
     })
+
+    app.delete('/api/notes/:id', function(req, res) {
+      let id = req.params.id;
+      notes.splice(id, 1);
+      updateDb()
+      console.log(`Deleted note with id: ${id}` );
+      res.json(notes);
+    })
+
     function updateDb() {
       fs.writeFileSync('db/db.json', JSON.stringify(notes, '\t'), err => {
         if (err) throw err;
